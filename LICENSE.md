@@ -1,7 +1,9 @@
 The PSIS.jl package is licensed under the MIT "Expat" License:
 
-> Copyright (c) 2016: alvaro1101.
-> 
+>  Copyright (c) 2016:
+
+> This is port from an original Matlab version create by Aki Vehari, and re-licensed with his permission.
+
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the "Software"), to deal
 > in the Software without restriction, including without limitation the rights
