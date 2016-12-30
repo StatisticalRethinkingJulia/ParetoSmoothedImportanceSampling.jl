@@ -4,5 +4,6 @@
 *.jls
 *.R
 *.bck
+*.pdf
 tmp/
 
