@@ -31,6 +31,8 @@ arXiv preprint arXiv:1507.02646.
 """
 module PSIS
 
+using Mamba
+
 export psislw
 export psisloo
 
@@ -57,7 +59,7 @@ not exist and if tail index k>1 the mean of the raw estimate does not exist
 and the PSIS estimate is likely to have large variation and some bias.
 
 # Arguments
-* `log_lik::AbstractArray`: Array of size n x m containing n posterior samples of the log likelihood terms p(y_i|\theta^s).
+* `log_lik::Union{AbstractArray, Mamba.Chains}`: Array of size n x m containing n posterior samples of the log likelihood terms p(y_i|\theta^s).
 * `wcpp::Real`: Percentage of samples used for GPD fit estimate (default is 20).
 * `wtrunc::Float64`: Positive parameter for truncating very large weights to n^wtrunc. Providing False or 0 disables truncation. Default values is 3/4.
 
@@ -65,15 +67,23 @@ and the PSIS estimate is likely to have large variation and some bias.
 * `loo::Real`: sum of the leave-one-out log predictive densities.
 * `loos::AbstractArray`: Individual leave-one-out log predictive density terms.* `ks::AbstractArray`: Estimated Pareto tail indeces.
 """
-function psisloo(log_lik, wcpp=20, wtrunc=3/4)
+# Compute LOO and standard error
+function psisloo(log_lik::Union{Mamba.Chains, AbstractArray},
+                 wcpp::Int64=20, wtrunc::Float64=3/4)
+   
     # log raw weights from log_lik
-    lw = -copy(log_lik)
+    if isa(log_lik, Mamba.Chains)
+        lw = Mamba.combine(log_lik)
+    else
+        lw = copy(log_lik)
+    end
     # compute Pareto smoothed log weights given raw log weights
-    lw, ks = psislw(lw, wcpp, wtrunc)
-    # compute
-    lw += log_lik
-    loos = logsumexp(lw, 1)
+    lwp, ks = psislw(-lw, wcpp, wtrunc)
+
+    lwp += lw
+    loos = logsumexp(lwp, 1)
     loo = sum(loos)
+
     return loo, loos, ks
 end
 
@@ -83,7 +93,7 @@ end
 Compute the Pareto smoothed importance sampling (PSIS).
 
 # Arguments
-* `lw::AbstractArray`: Array of size n x m containing m sets of n log weights. It is also possible to provide one dimensional array of length n.
+* `lw::Union{AbstractArray, Mamba.Chains}`: Array of size n x m containing m sets of n log weights. It is also possible to provide one dimensional array of length n.
 * `wcpp::Real`: Percentage of samples used for GPD fit estimate (default is 20).
 * `wtrunc::Float64`: Positive parameter for truncating very large weights to n^wtrunc. Providing False or 0 disables truncation. Default values is 3/4.
 
@@ -91,19 +101,32 @@ Compute the Pareto smoothed importance sampling (PSIS).
 * `lw_out::AbstractArray`: Smoothed log weights
 * `kss::AbstractArray`: Pareto tail indices
 """
-function psislw(lw, wcpp=20, wtrunc=3/4)
-    if ndims(lw) == 2
-        n, m = size(lw)
-    elseif ndims(lw) == 1
-        n = length(lw)
-        m = 1
+function psislw(lw::Union{AbstractArray, Mamba.Chains},
+                wcpp::Int64=20, wtrunc::Float64=3/4)
+
+    if isa(lw, Mamba.Chains)
+        lw_out = Mamba.combine(lw)
     else
+        lw_out = copy(lw)
+    end
+
+    if ~(1 <= ndims(lw_out) <= 2)
         throw(DimensionMismatch("Argument `lw` must be 1 or 2 dimensional."))
     end
-    if n <= 1
+    if size(lw_out,1) <= 1
         error("More than one log-weight needed.")
     end
-    lw_out = copy(lw)
+    return _psislw(lw_out, wcpp, wtrunc)
+end
+
+function _psislw(lw_out::Array{Float64}, wcpp::Int64, wtrunc::Float64)
+
+    if ndims(lw_out) == 2
+        n, m = size(lw_out)
+    elseif ndims(lw_out) == 1
+        n = length(lw_out)
+        m = 1
+    end
     kss = zeros(Float64, m)
 
     # precalculate constants

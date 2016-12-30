@@ -3,5 +3,6 @@
 *.jl.mem
 *.jls
 *.R
+*.bck
 tmp/
 

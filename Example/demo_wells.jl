@@ -30,11 +30,10 @@ else
     write("sim.jls", sim)
 end
 
-r,v,c = size(sim)
-ns = filter(x->startswith(x,"log_lik"),sim.names)
-log_lik = reshape(permutedims(sim[:,ns,:].value,[3, 1 ,2]), (r*c ,length(ns)))
+names_sim = filter(x->startswith(x,"log_lik"), sim.names)
 
 # Compute LOO and standard error
+log_lik = sim[:, names_sim, :]
 loo, loos, pk = psisloo(log_lik)
 elpd_loo = sum(loos)
 se_elpd_loo = std(loos) * sqrt(n)
@@ -50,7 +49,7 @@ else
     @printf(">> %d (%.0f%%) PSIS Pareto k estimates greater than 1\n", pkn2, pkn2/n*100)
 end
 
-
+exit()
 # Fit a second model, using log(arsenic) instead of arsenic
 x2 = Float64[log.(data["arsenic"])  data["dist"]]
 
@@ -64,11 +63,8 @@ else
     write("sim2.jls", sim2)
 end
 
-r,v,c = size(sim2)
-ns = filter(x->startswith(x,"log_lik"),sim2.names)
-log_lik = reshape(permutedims(sim2[:,ns,:].value,[3, 1 ,2]), (r*c ,length(ns)))
-
 # Compute LOO and standard error
+log_lik = sim2[:, names_sim, :]
 loo2, loos2, pk2 = psisloo(log_lik)
 elpd_loo = sum(loos2)
 se_elpd_loo = std(loos2) * sqrt(n)
@@ -105,10 +101,10 @@ for cvi in 1:10
                         "xt" => x[cvitst[cvi],:], "yt" => y[cvitst[cvi]])
                  ]
     # Fit the model in Stan
-    simcv = stan(stanmodel, standatacv, '.', CmdStanDir=CMDSTAN_HOME, summary=false)
-    r,v,c = size(sim2)
-    ns = filter(x->startswith(x,"log_likt"),simcv.names)
-    log_likt = reshape(permutedims(simcv[:,ns,:].value,[3, 1 ,2]), (r*c ,length(ns)))
+    simcv = stan(stanmodel, standatacv, '.', 
+                 CmdStanDir=CMDSTAN_HOME, summary=false)
+    ns = filter(x->startswith(x,"log_likt"), simcv.names)
+    log_likt = Mamba.combine(simcv[:, ns, :])
     kfcvs[cvitst[cvi]]= PSIS.logsumexp(log_likt) - log(size(log_likt,1))
 end
 
