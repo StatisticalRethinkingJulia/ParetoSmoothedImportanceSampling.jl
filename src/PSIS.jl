@@ -31,8 +31,6 @@ arXiv preprint arXiv:1507.02646.
 """
 module PSIS
 
-using Mamba
-
 export psislw
 export psisloo
 
@@ -68,15 +66,11 @@ and the PSIS estimate is likely to have large variation and some bias.
 * `loos::AbstractArray`: Individual leave-one-out log predictive density terms.* `ks::AbstractArray`: Estimated Pareto tail indeces.
 """
 # Compute LOO and standard error
-function psisloo(log_lik::Union{Mamba.Chains, AbstractArray},
-                 wcpp::Int64=20, wtrunc::Float64=3/4)
+function psisloo(log_lik::AbstractArray, wcpp::Int64=20, wtrunc::Float64=3/4)
    
     # log raw weights from log_lik
-    if isa(log_lik, Mamba.Chains)
-        lw = Mamba.combine(log_lik)
-    else
-        lw = copy(log_lik)
-    end
+    lw = copy(log_lik)
+
     # compute Pareto smoothed log weights given raw log weights
     lwp, ks = psislw(-lw, wcpp, wtrunc)
 
@@ -101,14 +95,9 @@ Compute the Pareto smoothed importance sampling (PSIS).
 * `lw_out::AbstractArray`: Smoothed log weights
 * `kss::AbstractArray`: Pareto tail indices
 """
-function psislw(lw::Union{AbstractArray, Mamba.Chains},
-                wcpp::Int64=20, wtrunc::Float64=3/4)
+function psislw(lw::AbstractArray, wcpp::Int64=20, wtrunc::Float64=3/4)
 
-    if isa(lw, Mamba.Chains)
-        lw_out = Mamba.combine(lw)
-    else
-        lw_out = copy(lw)
-    end
+    lw_out = copy(lw)
 
     if ~(1 <= ndims(lw_out) <= 2)
         throw(DimensionMismatch("Argument `lw` must be 1 or 2 dimensional."))
@@ -188,7 +177,7 @@ Estimate the paramaters for the Generalized Pareto Distribution (GPD). Returns e
 # Notes
 * This function returns a negative of Zhang and Stephens's k, because it is more common parameterization.
 """
-function gpdfitnew{T<:Real}(x::AbstractArray{T})
+function gpdfitnew(x::AbstractArray{T}) 
     if ndims(x) != 1 || length(x) <= 1
         throw(DimensionMismatch())
     end
