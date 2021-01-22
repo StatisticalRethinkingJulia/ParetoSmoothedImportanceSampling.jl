@@ -2,9 +2,9 @@ using StatisticalRethinking
 using JSON
 using StanSample
 using PSIS
-using Statistics
+#using Statistics
 using Printf
-using StatsPlots
+#using StatsPlots
 
 ProjDir = @__DIR__
 
@@ -26,7 +26,7 @@ data1 = (p = m, N = n, y = Int.(y), x = x)
 # Fit the model in Stan
 rc1 = stan_sample(sm1; data=data1)
 if success(rc1)
-    nt1 = read_samples(sm)
+    nt1 = read_samples(sm1)
 
     # Compute LOO and standard error
     log_lik = nt1.log_lik'
@@ -56,7 +56,7 @@ data2 = (p = m, N = n, y = Int.(y), x = x2)
 rc2 = stan_sample(sm1; data=data2)
 
 if success(rc2)
-    nt2 = read_samples(sm)
+    nt2 = read_samples(sm1)
     # Compute LOO and standard error
     log_lik = nt2.log_lik'
     loo2, loos2, pk2 = psisloo(log_lik)
@@ -104,12 +104,10 @@ for cvi in 1:10
         nt3 = read_samples(sm3)
         # Compute LOO and standard error
         log_likt = nt3.log_likt'
-        kfcvs[cvitst[cvi]] = PSIS.logsumexp(log_likt) .- log(size(log_likt, 1))
+        kfcvs[cvitst[cvi]] = PSIS.logsumexp(log_likt) .- log(size(log_likt, 2))
     end
 end
 
 # compare PSIS-LOO and k-fold-CV
-plot(x = loos, y = kfcvs, xlab = "PSIS-LOO", ylab = "10-fold-CV")
-
-#savefig(PDF(joinpath(ProjDir, "Compare.pdf"), 210mm, 210mm),p) 
-
+scatter(loos[1,:], kfcvs[1,:], xlab = "PSIS-LOO", ylab = "10-fold-CV", leg=false)
+savefig(joinpath(ProjDir, "compare.png"))
