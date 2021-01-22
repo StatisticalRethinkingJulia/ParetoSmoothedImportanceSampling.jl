@@ -1,17 +1,37 @@
 # PSIS
 
-[![Build Status](https://travis-ci.org/alvaro1101/PSIS.jl.svg?branch=master)](https://travis-ci.org/alvaro1101/PSIS.jl)
-
-[![Coverage Status](https://coveralls.io/repos/alvaro1101/PSIS.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/alvaro1101/PSIS.jl?branch=master)
-
-[![codecov.io](http://codecov.io/github/alvaro1101/PSIS.jl/coverage.svg?branch=master)](http://codecov.io/github/alvaro1101/PSIS.jl?branch=master)
-
 ## Pareto smoothed importance sampling (PSIS) and PSIS leave-one-out cross-validation reference code
 
 ### Introduction
 
 These files implement Pareto smoothed importance sampling (PSIS) and
-PSIS leave-one-out cross-validation for Julia base in the [Matlab package called `PSIS` by Aki Vehtari](https://github.com/avehtari/PSIS.git)
+PSIS leave-one-out cross-validation for Julia base on the [Matlab package called `PSIS` by Aki Vehtari](https://github.com/avehtari/PSIS.git)
+
+Included functions
+------------------
+psisloo
+    Pareto smoothed importance sampling leave-one-out log predictive densities.
+
+psislw
+    Pareto smoothed importance sampling.
+
+gpdfitnew
+    Estimate the paramaters for the Generalized Pareto Distribution (GPD).
+
+gpinv
+    Inverse Generalised Pareto distribution function.
+
+sumlogs
+    Sum of vector where numbers are represented by their logarithms.
+
+References
+----------
+Aki Vehtari, Andrew Gelman and Jonah Gabry (2015). Efficient implementation
+of leave-one-out cross-validation and WAIC for evaluating fitted Bayesian
+models. arXiv preprint arXiv:1507.04544.
+
+Aki Vehtari and Andrew Gelman (2015). Pareto smoothed importance sampling.
+arXiv preprint arXiv:1507.02646.
 
 ### Corresponding R code
 

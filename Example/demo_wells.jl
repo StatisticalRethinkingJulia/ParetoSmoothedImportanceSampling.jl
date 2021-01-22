@@ -1,39 +1,31 @@
+using StatisticalRethinking
 using JSON
-using Colors
-using Gadfly
-using DataFrames
-
-using Mamba
-using Stan
-
+using StanSample
 using PSIS
+using Statistics
 
-include("cvit.jl")
+ProjDir = @__DIR__
 
+include(joinpath(ProjDir, "cvit.jl"))
 
 # Data
-data = JSON.parsefile("wells.data.json")
+data = JSON.parsefile(joinpath(ProjDir, "wells.data.json"))
 y = Float64.(data["switched"])
 x = Float64[data["arsenic"]  data["dist"]]
 n, m = size(x)
 
 # Model
-model_str = readstring(open("arsenic_logistic.stan"))
-stanmodel = Stanmodel(name="arsenic_logistic", adapt=500, update=500, model=model_str)
+model_str = read(open(joinpath(ProjDir, "arsenic_logistic.stan")), String)
+tmpdir = joinpath(ProjDir, "tmp")
+sm = SampleModel("arsenic_logistic", model_str; tmpdir)
 
-if isfile("sim.jls")
-    sim = read("sim.jls", Chains)
-else
-    standata = [Dict("p" => m, "N" => n, "y" => y, "x" => x)]
-    # Fit the model in Stan
-    sim = stan(stanmodel, standata, '.', CmdStanDir=CMDSTAN_HOME, summary=false)
-    write("sim.jls", sim)
-end
-
-names_sim = filter(x->startswith(x,"log_lik"), sim.names)
+data = (p = m, N = n, y = Int.(y), x = x)
+# Fit the model in Stan
+rc = stan_sample(sm; data)
+nt = read_samples(sm)
 
 # Compute LOO and standard error
-log_lik = sim[:, names_sim, :]
+log_lik = nt.log_lik'
 loo, loos, pk = psisloo(log_lik)
 elpd_loo = sum(loos)
 se_elpd_loo = std(loos) * sqrt(n)
