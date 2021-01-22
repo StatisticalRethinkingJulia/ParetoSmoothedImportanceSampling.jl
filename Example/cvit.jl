@@ -29,7 +29,7 @@ function cvit(n, k=10, rsubstream=false)
     itr = Any[]
 
     for cvi in 1:a
-        push!(itst, collect(1:b) + (cvi-1) * b)
+        push!(itst, collect(1:b) .+ (cvi-1) * b)
         push!(itr, setdiff(1:n,itst[cvi])) 
     end
     for cvi in (a+1):k
