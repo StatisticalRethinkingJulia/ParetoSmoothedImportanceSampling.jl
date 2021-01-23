@@ -104,7 +104,7 @@ for cvi in 1:10
         nt3 = read_samples(sm3)
         # Compute LOO and standard error
         log_likt = nt3.log_likt'
-        kfcvs[cvitst[cvi]] = PSIS.logsumexp(log_likt) .- log(size(log_likt, 2))
+        kfcvs[cvitst[cvi]] = PSIS.logsumexp(log_likt) .- log(size(log_likt, 1))
     end
 end
 
