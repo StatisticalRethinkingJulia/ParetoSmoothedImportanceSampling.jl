@@ -1,6 +1,6 @@
 # PSIS
 
-## Pareto smoothed importance sampling (PSIS) and PSIS leave-one-out cross-validation reference code
+## Pareto smoothed importance sampling (PSIS) and PSIS leave-one-out cross-validation reference code.
 
 ### Introduction
 
@@ -26,7 +26,7 @@ logsumexp
 
 ### Acknowledgements
 
-The Julia translation has been done by ... ( @alvaro1101 on Github ),
+The Julia translation has been done by ... ( @alvaro1101 on Github ).
 
 ### Corresponding R code
 

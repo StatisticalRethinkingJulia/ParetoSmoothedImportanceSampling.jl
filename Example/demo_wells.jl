@@ -109,5 +109,7 @@ for cvi in 1:10
 end
 
 # compare PSIS-LOO and k-fold-CV
-scatter(loos[1,:], kfcvs[1,:], xlab = "PSIS-LOO", ylab = "10-fold-CV", leg=false)
+plot([-3.5, 0], [-3.5, 0], color=:red)
+scatter!(loos[1,:], kfcvs[1,:], xlab = "PSIS-LOO", ylab = "10-fold-CV",
+    leg=false, color=:darkblue)
 savefig(joinpath(ProjDir, "compare.png"))
