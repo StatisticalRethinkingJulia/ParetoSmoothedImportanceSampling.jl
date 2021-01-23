@@ -6,4 +6,4 @@
 *.bck
 *.pdf
 tmp/
-
+Manifest.toml
