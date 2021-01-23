@@ -5,10 +5,10 @@
 ### Introduction
 
 These files implement Pareto smoothed importance sampling (PSIS) and
-PSIS leave-one-out cross-validation for Julia base on the [Matlab package called `PSIS` by Aki Vehtari](https://github.com/avehtari/PSIS.git)
+PSIS leave-one-out cross-validation for Julia base on the [Matlab package called `PSIS` by Aki Vehtari](https://github.com/avehtari/PSIS.git).
 
-Included functions
-------------------
+###Included functions
+
 psisloo
     Pareto smoothed importance sampling leave-one-out log predictive densities.
 
@@ -21,22 +21,17 @@ gpdfitnew
 gpinv
     Inverse Generalised Pareto distribution function.
 
-sumlogs
-    Sum of vector where numbers are represented by their logarithms.
+logsumexp
+    Sum of a vector where numbers are represented by their logarithms.
 
-References
-----------
-Aki Vehtari, Andrew Gelman and Jonah Gabry (2015). Efficient implementation
-of leave-one-out cross-validation and WAIC for evaluating fitted Bayesian
-models. arXiv preprint arXiv:1507.04544.
+### Acknowledgements
 
-Aki Vehtari and Andrew Gelman (2015). Pareto smoothed importance sampling.
-arXiv preprint arXiv:1507.02646.
+The Julia translation has been done by ... ( @alvaro1101 on Github ),
 
 ### Corresponding R code
 
 The corresponding R code can be found in [R package called
-`loo'](https://github.com/stan-dev/loo) which is also available in CRAN.
+`loo`](https://github.com/stan-dev/loo) which is also available in CRAN.
                  
 ### References
 
