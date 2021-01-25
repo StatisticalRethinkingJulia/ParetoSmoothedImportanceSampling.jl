@@ -7,8 +7,12 @@
 
 ### Purpose of this package
 
-This Julia package implements Pareto smoothed importance sampling (PSIS) and
+This Julia package implements *Pareto smoothed importance sampling* (PSIS) and
 PSIS leave-one-out cross-validation based on the [Matlab package called `PSIS` by Aki Vehtari](https://github.com/avehtari/PSIS.git).
+
+The Julia translation has been done by @alvaro1101 (on Github). Updates for Julia v1+  and the new Pkg ecosystem have been done by Rob J Goedman.
+
+The intention is that PSIS.jl will become part of the [StatisticalRethinking.jl](https://github.com/StatisticalRethinkingJulia/StatisticalRethinking.jl).
 
 ### Installation
 
@@ -31,24 +35,20 @@ To use the demonstration Pluto notebooks, you can add:
 
 ### Included functions
 
-psisloo
+`psisloo()` -
     Pareto smoothed importance sampling leave-one-out log predictive densities.
 
-psislw
+`psislw()` -
     Pareto smoothed importance sampling.
 
-gpdfitnew
+`gpdfitnew()` -
     Estimate the paramaters for the Generalized Pareto Distribution (GPD).
 
-gpinv
+`gpinv()` -
     Inverse Generalised Pareto distribution function.
 
-logsumexp
+`logsumexp()` -
     Sum of a vector where numbers are represented by their logarithms.
-
-### Acknowledgements
-
-The Julia translation has been done by ... ( @alvaro1101 on Github ).
 
 ### Corresponding R code
 
