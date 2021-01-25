@@ -1,6 +1,6 @@
 # PSIS
 
-## Pareto smoothed importance sampling (PSIS) and PSIS leave-one-out cross-validation reference code.
+## Pareto smoothed importance sampling (PSIS) and PSIS leave-one-out cross-validation.
 
 ### Introduction
 
@@ -14,7 +14,7 @@ Once registered, PSIS.jl can be installed with:
 Pkg.dev("PSIS")
 ```
 
-A possible setup is to have only a few packages installed, e.g.:
+Usually I have only a few packages `permanently` installed, e.g.:
 ```
 (@v1.6) pkg> st
       Status `~/.julia/environments/v1.6/Project.toml`
