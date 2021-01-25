@@ -18,7 +18,6 @@ n, m = size(x)
 
 # Model
 model_str = read(open(joinpath(ProjDir, "arsenic_logistic.stan")), String)
-tmpdir = joinpath(ProjDir, "tmp")
 sm1 = SampleModel("arsenic_logistic", model_str)
 
 data1 = (p = m, N = n, y = Int.(y), x = x)

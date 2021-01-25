@@ -42,7 +42,7 @@ data = (N = size(df, 1), K = 4, y = Int.(df.y), roach1=df.roach1,
   exposure2=df.exposure2, senior=df.senior, treatment=df.treatment)
 n = size(df, 1)
 
-tmpdir=joinpath(ProjDir, "tmp")
+tmpdir = mktempdir()
 sm1 = SampleModel("roaches1", roaches1_stan; tmpdir)
 rc1 = stan_sample(sm1; data)
 
@@ -75,6 +75,7 @@ begin
   hline!([0.5], lab="pk = 0.5");hline!([0.7], lab="pk = 0.7")
   hline!([1], lab="pk = 1.0")
   title!("PSIS diagnostic plot for poisson-log model.")
+  savefig(joinpath(ProjDir, "diag_plot_1.png"))
 end
 
 
@@ -156,5 +157,6 @@ begin
   hline!([0.5], lab="pk = 0.5");hline!([0.7], lab="pk = 0.7")
   hline!([1], lab="pk = 1.0")
   title!("PSIS diagnostic plot for neg-binomial model.")
+  savefig(joinpath(ProjDir, "diag_plot_2.png"))
 end
 

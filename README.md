@@ -13,7 +13,6 @@ Once registered, PSIS.jl can be installed with:
 ```
 Pkg.dev("PSIS")
 ```
-
 Usually I have only a few packages `permanently` installed, e.g.:
 ```
 (@v1.6) pkg> st
@@ -21,17 +20,10 @@ Usually I have only a few packages `permanently` installed, e.g.:
   [634d3b9d] DrWatson v1.16.6
   [44cfe95a] Pkg
 ```
-
 To use the demonstration Pluto notebooks, you can add:
 ```
   [c3e4b0f8] Pluto v0.12.18
   [7f904dfe] PlutoUI v0.6.11
-```
-
-and for occasional access to R datasets:
-```
-  [6f49c342] RCall v0.13.10
-  [ce6b1742] RDatasets v0.7.3
 ```
 
 ### Included functions

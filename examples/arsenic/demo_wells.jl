@@ -18,7 +18,7 @@ n, m = size(x)
 
 # Model
 model_str = read(open(joinpath(ProjDir, "arsenic_logistic.stan")), String)
-tmpdir = joinpath(ProjDir, "tmp")
+tmpdir = mktempdir()
 sm1 = SampleModel("arsenic_logistic", model_str; tmpdir)
 println("\n-----------------------\n")
 
