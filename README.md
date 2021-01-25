@@ -2,10 +2,10 @@
 
 ## Pareto smoothed importance sampling (PSIS) and PSIS leave-one-out cross-validation.
 
-### Introduction
+### Purpose
 
-These files implement Pareto smoothed importance sampling (PSIS) and
-PSIS leave-one-out cross-validation for Julia base on the [Matlab package called `PSIS` by Aki Vehtari](https://github.com/avehtari/PSIS.git).
+This Julia package implements Pareto smoothed importance sampling (PSIS) and
+PSIS leave-one-out cross-validation based on the [Matlab package called `PSIS` by Aki Vehtari](https://github.com/avehtari/PSIS.git).
 
 ### Installation
 
