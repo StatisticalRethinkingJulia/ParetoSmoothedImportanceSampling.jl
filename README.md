@@ -1,8 +1,11 @@
 # PSIS
 
-## Pareto smoothed importance sampling (PSIS) and PSIS leave-one-out cross-validation.
+| **Project Status**                                                               |  **Build Status**                                                                                |
+|:-------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------:|
+|![][project-status-img] | ![][CI-build] |
 
-### Purpose
+
+### Purpose of this package
 
 This Julia package implements Pareto smoothed importance sampling (PSIS) and
 PSIS leave-one-out cross-validation based on the [Matlab package called `PSIS` by Aki Vehtari](https://github.com/avehtari/PSIS.git).
@@ -62,3 +65,10 @@ The corresponding R code can be found in [R package called
 - Jin Zhang & Michael A. Stephens (2009) A New and Efficient
   Estimation Method for the Generalized Pareto Distribution,
   Technometrics, 51:3, 316-325, DOI: 10.1198/tech.2009.08017
+
+
+[CI-build]: https://github.com/goedman/PSIS.jl/workflows/CI/badge.svg?branch=master
+
+[issues-url]: https://github.com/goedman/PSIS.jl/issues
+
+[project-status-img]: https://img.shields.io/badge/lifecycle-wip-orange.svg
