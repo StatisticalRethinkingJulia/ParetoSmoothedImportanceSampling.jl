@@ -66,12 +66,12 @@ if success(rc2)
 
     # Check the shape parameter k of the generalized Pareto distribution
     if all(pk .< 0.5)
-        println("All Pareto k estimates OK (k < 0.5)")
+        println("All Pareto k estimates OK (k < 0.5).")
     else
-        pkn1 = sum((pk .>= 0.5) & (pk .< 1))
-        pkn2 = sum(pk .>= 1)
-        @printf(">> %d (%.0f%%) PSIS Pareto k estimates between 0.5 and 1\n", pkn1, pkn1/n*100)
-        @printf(">> %d (%.0f%%) PSIS Pareto k estimates greater than 1\n", pkn2, pkn2/n*100)
+        pk_good = sum(pk .<= 0.5)
+        pk_ok = length(pk[pk .<= 0.7]) - pk_good
+        pk_bad = length(pk[pk .<= 1]) - pk_good - pk_ok
+        println((good=pk_good, ok=pk_ok, bad=pk_bad, very_bad=sum(pk .>= 1)))
     end
 end
 
