@@ -39,6 +39,8 @@ include("psislw.jl")
 include("gpdfitnew.jl")
 include("gpinv.jl")
 include("logsumexp.jl")
+include("waic.jl")
+include("pk_utilities.jl")
 
 export
     psis_path,
