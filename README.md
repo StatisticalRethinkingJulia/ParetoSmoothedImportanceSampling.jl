@@ -50,6 +50,21 @@ To use the demonstration Pluto notebooks, you can add:
 `logsumexp()` -
     Sum of a vector where numbers are represented by their logarithms.
 
+`waic()` -
+    Compute WAIC for a loglikelihood matrix.
+
+`pk_qualify()` -
+    Show location of pk values.
+
+`pk_plot()` -
+    Plot pk values.
+
+`var2()` -
+    Uncorrected variance.
+
+`log_sum_exp()` -
+    Compute logarithmic sum of a vector.
+
 ### Corresponding R code
 
 The corresponding R code can be found in [R package called
