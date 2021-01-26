@@ -7,11 +7,11 @@ function log_sum_exp(x)
     xmax + log(xsum)
 end
 
-function waic( ll::AbstractArray; pointwise=FALSE , log_lik="log_lik" , kwargs... )
+function waic( ll::AbstractArray; pointwise=false , log_lik="log_lik" , kwargs... )
     
     n_samples, n_obs = size(ll)
-    lpd <- zeros(n_obs)
-    pD <- zeros(n_obs)
+    lpd = zeros(n_obs)
+    pD = zeros(n_obs)
 
     for i in 1:n_obs 
         lpd[i] = log_sum_exp(ll[:,i]) .- log(n_samples)
@@ -19,7 +19,7 @@ function waic( ll::AbstractArray; pointwise=FALSE , log_lik="log_lik" , kwargs..
     end
 
     waic_vec = (-2) .* ( lpd - pD )
-    if pointwise==FALSE
+    if pointwise == false
         waic = sum(waic_vec)
         lpd = sum(lpd)
         pD = sum(pD)
@@ -27,6 +27,7 @@ function waic( ll::AbstractArray; pointwise=FALSE , log_lik="log_lik" , kwargs..
         waic = waic_vec
     end
 
+    local se
     try 
         se = sqrt( n_obs*var2(waic_vec) )
     catch e
