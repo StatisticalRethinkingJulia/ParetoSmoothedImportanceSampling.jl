@@ -7,10 +7,12 @@
 
 ### Purpose of this package
 
-This Julia package implements *Pareto smoothed importance sampling* (PSIS) and
+This package implements model comparison methods as used and explained in StatisticalRethinking (chapter 7).
+
+The most important methods are *Pareto smoothed importance sampling* (PSIS) and
 PSIS leave-one-out cross-validation based on the [Matlab package called `PSIS` by Aki Vehtari](https://github.com/avehtari/PSIS.git).
 
-The Julia translation has been done by @alvaro1101 (on Github). Updates for Julia v1+  and the new Pkg ecosystem have been done by Rob J Goedman.
+The Julia translation has been done by @alvaro1101 (on Github). Updates for Julia v1+, the new Pkg ecosystem and the inclusion of WAIC and pk utilities have been done by Rob J Goedman.
 
 The intention is that PSIS.jl will become part of the [StatisticalRethinking.jl](https://github.com/StatisticalRethinkingJulia/StatisticalRethinking.jl).
 
@@ -32,6 +34,7 @@ To use the demonstration Pluto notebooks, you can add:
   [c3e4b0f8] Pluto v0.12.18
   [7f904dfe] PlutoUI v0.6.11
 ```
+The cars WAIC example requires RDatasets.jl to be installed and functioning.
 
 ### Included functions
 
