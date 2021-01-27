@@ -43,3 +43,6 @@ function psisloo(log_lik::AbstractArray, wcpp::Int64=20, wtrunc::Float64=3/4)
 
     return loo, loos, ks
 end
+
+export
+    psisloo

@@ -7,8 +7,8 @@ function pk_qualify(pk::Vector{Float64})
     (good=pk_good, ok=pk_ok, bad=pk_bad, very_bad=sum(pk .> 1))
 end
 
-function pk_plot(pk::Vector{Float64}, title="PSIS diagnostic plot.",
-    leg=:topleft; kwargs...)
+function pk_plot(pk::Vector{Float64}; title="PSIS diagnostic plot.",
+    leg=:topleft, kwargs...)
     scatter(pk, xlab="Datapoint", ylab="Pareto shape k",
         marker=2.5, lab="Pk points", leg=leg)
   hline!([0.5], lab="pk = 0.5");hline!([0.7], lab="pk = 0.7")

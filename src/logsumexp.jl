@@ -12,3 +12,6 @@ function logsumexp(x::AbstractArray, d::Int64=1)
     end
     result
 end
+
+export
+    logsumexp

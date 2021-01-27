@@ -81,3 +81,6 @@ function _psislw(lw_out::Array{Float64}, wcpp::Int64, wtrunc::Float64)
     end
     return lw_out, kss
 end
+
+export
+    psislw

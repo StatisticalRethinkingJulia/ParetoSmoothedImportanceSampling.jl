@@ -1,12 +1,6 @@
 
 var2(x) = mean(x.^2) .- mean(x)^2
 
-function log_sum_exp(x) 
-    xmax = maximum(x)
-    xsum = sum(exp.(x .- xmax))
-    xmax + log(xsum)
-end
-
 function waic( ll::AbstractArray; pointwise=false , log_lik="log_lik" , kwargs... )
     
     n_samples, n_obs = size(ll)
@@ -40,5 +34,4 @@ end
 
 export
     var2,
-    log_sum_exp,
     waic

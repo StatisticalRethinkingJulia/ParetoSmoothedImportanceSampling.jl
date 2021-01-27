@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.12.18
+# v0.12.19
 
 using Markdown
 using InteractiveUtils
@@ -80,7 +80,7 @@ end
 
 # ╔═╡ 20ed768a-6008-11eb-13f4-458ca1a29592
 begin
-	lppd = [log_sum_exp(log_lik[:, i] .- log(ns)) for i in 1:n]
+	lppd = [PSIS.logsumexp(log_lik[:, i] .- log(ns)) for i in 1:n]
 	pwaic = [var(log_lik[:, i]) for i in 1:n]
 	-2(sum(lppd) - sum(pwaic))
 end

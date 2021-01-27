@@ -43,9 +43,6 @@ include("waic.jl")
 include("pk_utilities.jl")
 
 export
-    psis_path,
-    psislw,
-    psisloo,
-    logsumexp
+    psis_path
 
 end
