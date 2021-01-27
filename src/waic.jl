@@ -8,7 +8,7 @@ function waic( ll::AbstractArray; pointwise=false , log_lik="log_lik" , kwargs..
     pD = zeros(n_obs)
 
     for i in 1:n_obs 
-        lpd[i] = log_sum_exp(ll[:,i]) .- log(n_samples)
+        lpd[i] = logsumexp(ll[:,i]) .- log(n_samples)
         pD[i] = var2(ll[:,i])
     end
 
