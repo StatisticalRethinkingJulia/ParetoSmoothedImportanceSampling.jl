@@ -1,7 +1,7 @@
 using StatisticalRethinking
 using JSON
 using StanSample
-using PSIS
+using ParetoSmoothedImportanceSampling
 #using Statistics
 using Printf
 #using StatsPlots
@@ -104,7 +104,9 @@ for cvi in 1:10
         nt3 = read_samples(sm3)
         # Compute LOO and standard error
         log_likt = nt3.log_likt'
-        kfcvs[cvitst[cvi]] = PSIS.logsumexp(log_likt) .- log(size(log_likt, 1))
+        n_sam, n_obs = size(log_lik)
+        kfcvs[cvitst[cvi]] =
+            reshape(logsumexp(log_likt .- log(n_sam); dims=1), n_obs)
     end
 end
 

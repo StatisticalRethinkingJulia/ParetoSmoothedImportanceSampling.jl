@@ -1,4 +1,5 @@
-using StatisticalRethinking, StanSample, PSIS, RDatasets
+using StatisticalRethinking, StanSample
+using ParetoSmoothedImportanceSampling, RDatasets
 
 df = RDatasets.dataset("datasets", "cars")
 

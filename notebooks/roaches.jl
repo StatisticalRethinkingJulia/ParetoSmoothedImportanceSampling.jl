@@ -5,7 +5,7 @@ using Markdown
 using InteractiveUtils
 
 # ╔═╡ dcb4d418-5ec2-11eb-29d8-214f38b4d3ae
-using Pkg, DrWatson, PSIS
+using Pkg, DrWatson, ParetoSmoothedImportanceSampling
 
 # ╔═╡ c9e1486c-5e9f-11eb-08ed-671b762dd075
 begin

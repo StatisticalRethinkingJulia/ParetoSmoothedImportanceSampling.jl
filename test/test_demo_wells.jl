@@ -1,7 +1,7 @@
 using StatisticalRethinking
 using JSON
 using StanSample
-using PSIS
+using ParetoSmoothedImportanceSampling
 #using Statistics
 using Printf
 #using StatsPlots

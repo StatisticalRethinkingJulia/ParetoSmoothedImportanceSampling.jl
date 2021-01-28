@@ -1,5 +1,5 @@
-using StatisticalRethinking, StanSample, PSIS
-using Printf
+using StatisticalRethinking, StanSample
+using Printf, ParetoSmoothedImportanceSampling
 
 ProjDir = @__DIR__
 

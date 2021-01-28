@@ -1,4 +1,4 @@
-# PSIS.jl: Pareto smoothed importance sampling.
+# ParetoSmoothedImportanceSampling.jl
 
 | **Project Status**                                                               |  **Build Status**                                                                                |
 |:-------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------:|
@@ -10,17 +10,17 @@
 This package implements model comparison methods as used and explained in StatisticalRethinking (chapter 7).
 
 The most important methods are *Pareto smoothed importance sampling* (PSIS) and
-PSIS leave-one-out cross-validation based on the [Matlab package called `PSIS` by Aki Vehtari](https://github.com/avehtari/PSIS.git).
+PSIS leave-one-out cross-validation based on the [Matlab package called `PSIS` by Aki Vehtari](https://github.com/avehtari/PSIS.git). The Julia translation has been done by @alvaro1101 (on Github).
 
-The Julia translation has been done by @alvaro1101 (on Github). Updates for Julia v1+, the new Pkg ecosystem and the inclusion of WAIC and pk utilities have been done by Rob J Goedman.
+Updates for Julia v1+, the new Pkg ecosystem and the addition of WAIC and pk utilities have been done by Rob J Goedman.
 
-The intention is that PSIS.jl will become part of the [StatisticalRethinking.jl](https://github.com/StatisticalRethinkingJulia/StatisticalRethinking.jl).
+ParetoSmoothedImportanceSampling.jl will become part of the [StatisticalRethinking.jl](https://github.com/StatisticalRethinkingJulia/StatisticalRethinking.jl).
 
 ### Installation
 
-Once registered, PSIS.jl can be installed with:
+Once registered, ParetoSmoothedImportanceSampling.jl can be installed with:
 ```
-Pkg.dev("PSIS")
+Pkg.dev("ParetoSmoothedImportanceSampling")
 ```
 Usually I have only a few packages `permanently` installed, e.g.:
 ```
@@ -79,8 +79,8 @@ The corresponding R code can be found in [R package called
   Technometrics, 51:3, 316-325, DOI: 10.1198/tech.2009.08017
 
 
-[CI-build]: https://github.com/goedman/PSIS.jl/workflows/CI/badge.svg?branch=master
+[CI-build]: https://github.com/StatisticalRethinkingJulia/ParetoSmoothedImportanceSampling.jl/workflows/CI/badge.svg?branch=master
 
-[issues-url]: https://github.com/goedman/PSIS.jl/issues
+[issues-url]: https://github.com/StatisticalRethinkingJulia/ParetoSmoothedImportanceSampling.jl/issues
 
 [project-status-img]: https://img.shields.io/badge/lifecycle-wip-orange.svg
