@@ -75,12 +75,12 @@ end
 if success(rc)
 	nt_cars = read_samples(cars_stan_model);
 	log_lik = nt_cars.log_lik'
-	ns, n = size(log_lik)
 end
 
 # ╔═╡ 20ed768a-6008-11eb-13f4-458ca1a29592
 begin
-	lppd = [StatsFuns.logsumexp(log_lik[:, i] .- log(ns)) for i in 1:n]
+    ns, n = size(log_lik)
+	lppd = reshape(logsumexp(log_lik .- log(ns); dims=1), n)
 	pwaic = [var(log_lik[:, i]) for i in 1:n]
 	-2(sum(lppd) - sum(pwaic))
 end

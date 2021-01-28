@@ -50,9 +50,6 @@ The cars WAIC example requires RDatasets.jl to be installed and functioning.
 `gpinv()` -
     Inverse Generalised Pareto distribution function.
 
-`logsumexp()` -
-    Sum of a vector where numbers are represented by their logarithms.
-
 `waic()` -
     Compute WAIC for a loglikelihood matrix.
 
@@ -64,9 +61,6 @@ The cars WAIC example requires RDatasets.jl to be installed and functioning.
 
 `var2()` -
     Uncorrected variance.
-
-`log_sum_exp()` -
-    Compute logarithmic sum of a vector.
 
 ### Corresponding R code
 

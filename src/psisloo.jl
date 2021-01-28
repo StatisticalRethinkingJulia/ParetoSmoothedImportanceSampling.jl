@@ -38,7 +38,7 @@ function psisloo(log_lik::AbstractArray, wcpp::Int64=20, wtrunc::Float64=3/4)
     lwp, ks = psislw(-lw, wcpp, wtrunc)
 
     lwp += lw
-    loos = logsumexp(lwp, 1)
+    loos = reshape(logsumexp(lwp, dims=1), size(lw, 2))
     loo = sum(loos)
 
     return loo, loos, ks

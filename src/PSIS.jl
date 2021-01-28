@@ -32,13 +32,15 @@ arXiv preprint arXiv:1507.02646.
 
 module PSIS
 
+using StatsFuns
+
 psis_path = @__DIR__
 
 include("psisloo.jl")
 include("psislw.jl")
 include("gpdfitnew.jl")
 include("gpinv.jl")
-include("logsumexp.jl")
+#include("logsumexp.jl")
 include("waic.jl")
 include("pk_utilities.jl")
 

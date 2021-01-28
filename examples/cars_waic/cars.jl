@@ -37,14 +37,13 @@ rc = stan_sample(cars_stan_model; data)
 if success(rc)
     cars_df = read_samples(cars_stan_model; output_format=:dataframe)
     precis(cars_df[:, [:a, :b, :sigma]])
-
     nt_cars = read_samples(cars_stan_model);
 end
 
 log_lik = nt_cars.log_lik'
-ns, n = size(log_lik)
-lppd = [log_sum_exp(log_lik[:, i] .- log(ns)) for i in 1:n]
-pwaic = [var(log_lik[:, i]) for i in 1:n]
+n_sam, n_obs = size(log_lik)
+lppd = reshape(logsumexp(log_lik .- log(n_sam); dims=1), n_obs)
+pwaic = [var(log_lik[:, i]) for i in 1:n_obs]
 -2(sum(lppd) - sum(pwaic)) |> display
 
 waic(log_lik) |> display
