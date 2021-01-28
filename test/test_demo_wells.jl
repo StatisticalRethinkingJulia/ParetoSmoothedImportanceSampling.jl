@@ -88,8 +88,6 @@ sm3 = SampleModel("arsenic_logistic_t", model_str);
 cvitr, cvitst = cvit(n, 10, true)
 kfcvs = similar(loos)
 for cvi in 1:3
-    @printf("%d\n", cvi)
-
     standatacv = (p = m, N = length(cvitr[cvi]), Nt = length(cvitst[cvi]),
         x = x[cvitr[cvi],:], y = Int.(y[cvitr[cvi]]),
         xt = x[cvitst[cvi],:], yt = Int.(y[cvitst[cvi]]))
@@ -100,6 +98,8 @@ for cvi in 1:3
         nt3 = read_samples(sm3)
         # Compute LOO and standard error
         log_likt = nt3.log_likt'
-        kfcvs[cvitst[cvi]] = PSIS.logsumexp(log_likt) .- log(size(log_likt, 1))
+        local n_sam, n_obs = size(log_likt)
+        kfcvs[cvitst[cvi]] .=
+            reshape(logsumexp(log_likt .- log(n_sam), dims=1), n_obs)
     end
 end

@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.12.18
+# v0.12.19
 
 using Markdown
 using InteractiveUtils
@@ -71,10 +71,7 @@ if success(rc1)
 	
 	# Check the shape parameter k of the generalized Pareto distribution
 	
-	pk_good1 = sum(pk1 .<= 0.5)
-	pk_ok1 = length(pk1[pk1 .<= 0.7]) - pk_good1
-	pk_bad1 = length(pk1[pk1 .<= 1]) - pk_good1 - pk_ok1
-	(good=pk_good1, ok=pk_ok1, bad=pk_bad1, very_bad=sum(pk1 .> 1))
+	pk_qualify(pk1)
 end
 
 # ╔═╡ 5a76e4aa-5ebd-11eb-2e15-6d5808ead825
@@ -105,10 +102,7 @@ if success(rc2)
 	
 	# Check the shape parameter k of the generalized Pareto distribution
 	
-	pk_good2 = sum(pk2 .<= 0.5)
-	pk_ok2 = length(pk2[pk2 .<= 0.7]) - pk_good2
-	pk_bad2 = length(pk2[pk2 .<= 1]) - pk_good2 - pk_ok2
-	(good=pk_good2, ok=pk_ok2, bad=pk_bad2, very_bad=sum(pk2 .> 1))
+	pk_qualify(pk2)
 end
 
 # ╔═╡ dd28d430-5ebd-11eb-1854-ab4c13e82c34
@@ -147,7 +141,9 @@ begin
 			nt3 = read_samples(sm3)
 			# Compute LOO and standard error
 			log_likt = nt3.log_likt'
-			kfcvs[cvitst[cvi]] = PSIS.logsumexp(log_likt) .- log(size(log_likt, 1))
+        	local n_sam, n_obs = size(log_likt)
+        	kfcvs[cvitst[cvi]] .=
+            	reshape(logsumexp(log_likt .- log(n_sam), dims=1), n_obs)
 		end
 	end
 end
@@ -158,7 +154,7 @@ begin
 	# compare PSIS-LOO and k-fold-CV
 	
 	plot([-3.5, 0], [-3.5, 0], color=:red)
-	scatter!(loos1[1,:], kfcvs[1,:], xlab = "PSIS-LOO", ylab = "10-fold-CV",
+	scatter!(loos1, kfcvs, xlab = "PSIS-LOO", ylab = "10-fold-CV",
 		leg=false, color=:darkblue)
 end
 
