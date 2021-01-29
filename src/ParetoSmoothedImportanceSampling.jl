@@ -30,7 +30,7 @@ Aki Vehtari and Andrew Gelman (2015). Pareto smoothed importance sampling.
 arXiv preprint arXiv:1507.02646.
 """
 
-module PSIS
+module ParetoSmoothedImportanceSampling
 
 using StatsFuns
 
