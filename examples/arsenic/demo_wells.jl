@@ -92,8 +92,6 @@ sm3 = SampleModel("arsenic_logistic_t", model_str; tmpdir=tmpdir);
 cvitr, cvitst = cvit(n, 10, true)
 kfcvs = similar(loos)
 for cvi in 1:10
-    @printf("%d\n", cvi)
-
     standatacv = (p = m, N = length(cvitr[cvi]), Nt = length(cvitst[cvi]),
         x = x[cvitr[cvi],:], y = Int.(y[cvitr[cvi]]),
         xt = x[cvitst[cvi],:], yt = Int.(y[cvitst[cvi]]))
@@ -104,14 +102,14 @@ for cvi in 1:10
         nt3 = read_samples(sm3)
         # Compute LOO and standard error
         log_likt = nt3.log_likt'
-        n_sam, n_obs = size(log_lik)
-        kfcvs[cvitst[cvi]] =
+        local n_sam, n_obs = size(log_likt)
+        kfcvs[cvitst[cvi]] .=
             reshape(logsumexp(log_likt .- log(n_sam); dims=1), n_obs)
     end
 end
 
 # compare PSIS-LOO and k-fold-CV
 plot([-3.5, 0], [-3.5, 0], color=:red)
-scatter!(loos[1,:], kfcvs[1,:], xlab = "PSIS-LOO", ylab = "10-fold-CV",
+scatter!(loos1, kfcvs, xlab = "PSIS-LOO", ylab = "10-fold-CV",
     leg=false, color=:darkblue)
 savefig(joinpath(ProjDir, "compare.png"))
