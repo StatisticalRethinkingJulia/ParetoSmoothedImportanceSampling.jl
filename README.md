@@ -7,21 +7,20 @@
 
 ### Purpose of this package
 
-This package implements model comparison methods as used and explained in StatisticalRethinking (chapter 7).
+This package implements model comparison methods as used and explained in StatisticalRethinking (chapter 7). Thus, ParetoSmoothedImportanceSampling.jl is part of the [StatisticalRethinking family of packages](https://github.com/StatisticalRethinkingJulia/StatisticalRethinking.jl).
 
 The most important methods are *Pareto smoothed importance sampling* (PSIS) and
-PSIS leave-one-out cross-validation based on the [Matlab package called `PSIS` by Aki Vehtari](https://github.com/avehtari/PSIS.git). The Julia translation has been done by @alvaro1101 (on Github).
+PSIS leave-one-out cross-validation based on the [Matlab package called `PSIS` by Aki Vehtari](https://github.com/avehtari/PSIS.git). The Julia translation has been done by @alvaro1101 (on Github) in a (unpublished) package called [PSIS.jl](https://github.com/alvaro1101/PSIS.jl).
 
 Updates for Julia v1+, the new Pkg ecosystem and the addition of WAIC and pk utilities have been done by Rob J Goedman.
-
-ParetoSmoothedImportanceSampling.jl will become part of the [StatisticalRethinking.jl](https://github.com/StatisticalRethinkingJulia/StatisticalRethinking.jl).
 
 ### Installation
 
 Once registered, ParetoSmoothedImportanceSampling.jl can be installed with:
 ```
-Pkg.dev("ParetoSmoothedImportanceSampling")
+Pkg.add("ParetoSmoothedImportanceSampling")
 ```
+
 Usually I have only a few packages `permanently` installed, e.g.:
 ```
 (@v1.6) pkg> st
@@ -44,12 +43,6 @@ The cars WAIC example requires RDatasets.jl to be installed and functioning.
 `psislw()` -
     Pareto smoothed importance sampling.
 
-`gpdfitnew()` -
-    Estimate the paramaters for the Generalized Pareto Distribution (GPD).
-
-`gpinv()` -
-    Inverse Generalised Pareto distribution function.
-
 `waic()` -
     Compute WAIC for a loglikelihood matrix.
 
@@ -59,13 +52,21 @@ The cars WAIC example requires RDatasets.jl to be installed and functioning.
 `pk_plot()` -
     Plot pk values.
 
+Additional function:
+
+`gpdfitnew()` -
+    Estimate the paramaters for the Generalized Pareto Distribution (GPD).
+
+`gpinv()` -
+    Inverse Generalised Pareto distribution function.
+
 `var2()` -
     Uncorrected variance.
 
 ### Corresponding R code
 
-The corresponding R code can be found in [R package called
-`loo`](https://github.com/stan-dev/loo) which is also available in CRAN.
+Corresponding R code for the PSIS methods can be found in [R package called
+`loo`](https://github.com/stan-dev/loo) which is available in CRAN.
                  
 ### References
 
