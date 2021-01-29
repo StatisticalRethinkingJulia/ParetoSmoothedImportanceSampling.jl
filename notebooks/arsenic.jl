@@ -5,7 +5,7 @@ using Markdown
 using InteractiveUtils
 
 # ╔═╡ 8183b318-5ebb-11eb-1cd8-a96e8704a378
-using Pkg, DrWatson, PSIS
+using Pkg, DrWatson, ParetoSmoothedImportanceSampling
 
 # ╔═╡ d4f7a39c-5ebb-11eb-0a37-4b8499832108
 begin
@@ -20,7 +20,7 @@ end;
 # ╔═╡ 686dac30-5ebb-11eb-00f1-434980dba906
 begin
 	cd(psis_path)
-	@quickactivate "PSIS"
+	@quickactivate "ParetoSmoothedImportanceSampling"
 	pkg"instantiate"
 end
 
