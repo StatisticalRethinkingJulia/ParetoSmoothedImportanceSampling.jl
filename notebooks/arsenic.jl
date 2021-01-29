@@ -118,12 +118,12 @@ end
 md" ### k-fold-CV."
 
 # ╔═╡ e86ee35c-5ebd-11eb-1932-ffbde638f11e
-md" ##### k-fold-CV should be used if several khats>0.5, in this case it is not needed, but provided as an example."
+md" ##### k-fold-CV should be used if several pk>0.5, in this case it is not needed, but provided as an example."
 
 # ╔═╡ e86f0ab2-5ebd-11eb-1a0b-6958db3a7435
 begin
 	model_str_2 = read(open(joinpath(ProjDir, "arsenic_logistic_t.stan")), String)
-	sm3 = SampleModel("arsenic_logistic_t", model_str_2; tmpdir=tmpdir)
+	sm3 = SampleModel("arsenic_logistic_t", model_str_2)
 end;
 
 # ╔═╡ e70f73aa-5eb8-11eb-1960-bf6731681898

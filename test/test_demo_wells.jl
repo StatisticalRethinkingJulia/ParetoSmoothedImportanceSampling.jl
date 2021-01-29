@@ -42,6 +42,7 @@ if success(rc1)
         @printf(">> %d (%.0f%%) PSIS Pareto k estimates greater than 1\n", pkn2, pkn2/n*100)
     end
 end
+println()
 
 # Fit a second model, using log(arsenic) instead of arsenic
 x2 = Float64[log.(data["arsenic"])  data["dist"]]
@@ -76,6 +77,7 @@ if success(rc1) && success(rc2)
     loodiff = loos - loos2
     @printf("elpd_diff = %.1f, SE(elpd_diff) = %.1f\n",sum(loodiff), std(loodiff) * sqrt(n))
 end
+println()
 
 ## k-fold-CV
 # k-fold-CV should be used if several khats>0.5

@@ -2,9 +2,7 @@ using StatisticalRethinking
 using JSON
 using StanSample
 using ParetoSmoothedImportanceSampling
-#using Statistics
 using Printf
-#using StatsPlots
 
 ProjDir = @__DIR__
 
@@ -110,6 +108,6 @@ end
 
 # compare PSIS-LOO and k-fold-CV
 plot([-3.5, 0], [-3.5, 0], color=:red)
-scatter!(loos1, kfcvs, xlab = "PSIS-LOO", ylab = "10-fold-CV",
+scatter!(loos, kfcvs, xlab = "PSIS-LOO", ylab = "10-fold-CV",
     leg=false, color=:darkblue)
 savefig(joinpath(ProjDir, "compare.png"))

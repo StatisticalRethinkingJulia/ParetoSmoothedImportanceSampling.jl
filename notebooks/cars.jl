@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.12.19
+# v0.12.20
 
 using Markdown
 using InteractiveUtils
@@ -23,7 +23,7 @@ md"
 # ╔═╡ 20d377b2-6008-11eb-364a-617b6934ecb2
 begin
 	cd(psis_path)
-	@quickactivate "PSIS"
+	@quickactivate "ParetoSmoothedImportanceSampling"
 	pkg"instantiate"
 end
 
@@ -75,7 +75,7 @@ end
 if success(rc)
 	nt_cars = read_samples(cars_stan_model);
 	log_lik = nt_cars.log_lik'
-end
+end;
 
 # ╔═╡ 20ed768a-6008-11eb-13f4-458ca1a29592
 begin

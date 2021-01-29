@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.12.18
+# v0.12.20
 
 using Markdown
 using InteractiveUtils
@@ -15,13 +15,13 @@ end
 # ╔═╡ d20c24f8-5ec2-11eb-3d45-d97fedebee8e
 begin
 	cd(psis_path)
-	@quickactivate "PSIS"
+	@quickactivate "ParetoSmoothedImportanceSamplng"
 	pkg"instantiate"
 end
 
 # ╔═╡ e3552750-5e9f-11eb-324b-8df36d671c79
 begin
-	ProjDir = joinpath(psis_path, "..", "Example", "roaches")
+	ProjDir = joinpath(psis_path, "..", "examples", "roaches")
 	df = CSV.read(joinpath(ProjDir, "roachdata.csv"), DataFrame)
 	df.roach1 = df.roach1 / 100
 end;
@@ -93,13 +93,7 @@ if success(rc1)
 end
 
 # ╔═╡ e3b82668-5e9f-11eb-1641-a9dfed9eb108
-begin
-  scatter(pk1, xlab="Datapoint", ylab="Pareto shape k",
-    marker=2.5, lab="Pk points")
-  hline!([0.5], lab="pk = 0.5");hline!([0.7], lab="pk = 0.7")
-  hline!([1], lab="pk = 1.0")
-  title!("PSIS diagnostic plot for poisson-log model.")
-end
+pk_plot(pk1, title="PSIS diagnostic plot for poisson-log model.")
 
 # ╔═╡ e3b8fc58-5e9f-11eb-0607-e5424a04df9c
 md" ##### Simple negative binomial regression example using the 2nd parametrization of the negative binomial distribution, see section 40.1-3 in the Stan reference guide."
@@ -165,21 +159,14 @@ end
 
 # ╔═╡ ce509a0c-5ea8-11eb-3f2e-01023f29a1e3
 if success(rc2)
+	
   # Check the shape parameter k of the generalized Pareto distribution
-    pk_good = sum(pk2 .<= 0.5)
-    pk_ok = length(pk2[pk2 .<= 0.7]) - pk_good
-    pk_bad = length(pk2[pk2 .<= 1]) - pk_good - pk_ok
-    (good=pk_good, ok=pk_ok, bad=pk_bad, very_bad=sum(pk2 .> 1))
+	
+    pk_qualify(pk2)
 end
 
 # ╔═╡ e3f103f0-5e9f-11eb-159a-452961ed2619
-begin
-  scatter(pk2, xlab="Datapoint", ylab="Pareto shape k",
-    marker=2.5, lab="Pk points", leg=:topleft)
-  hline!([0.5], lab="pk = 0.5");hline!([0.7], lab="pk = 0.7")
-  hline!([1], lab="pk = 1.0")
-  title!("PSIS diagnostic plot for neg-binomial model.")
-end
+  pk_plot(pk2; title="PSIS diagnostic plot for neg-binomial model.", leg=:topright)
 
 # ╔═╡ Cell order:
 # ╠═dcb4d418-5ec2-11eb-29d8-214f38b4d3ae
