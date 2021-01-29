@@ -1,3 +1,5 @@
+using Random
+
 # CVIT - Create itr and itst indeces for k-fold-cv
 #
 #    Description

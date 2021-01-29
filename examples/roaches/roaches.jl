@@ -1,5 +1,5 @@
-using StatisticalRethinking, StanSample
-using Printf, ParetoSmoothedImportanceSampling
+using ParetoSmoothedImportanceSampling, StanSample
+using CSV, Printf, StatsPlots
 
 ProjDir = @__DIR__
 
@@ -47,8 +47,7 @@ sm1 = SampleModel("roaches1", roaches1_stan; tmpdir)
 rc1 = stan_sample(sm1; data)
 
 if success(rc1)
-  roaches1_df = read_samples(sm1; output_format=:dataframe)
-  precis(roaches1_df[:, [Symbol("beta.$i") for i in 1:data.K]])
+  stan_summary(sm1, true)
   nt1 = read_samples(sm1)
 
   # Compute LOO and standard error
@@ -129,8 +128,7 @@ sm2 = SampleModel("roaches2", roaches2_stan; tmpdir)
 rc2 = stan_sample(sm2; data)
 
 if success(rc2)
-  roaches2_df = read_samples(sm2; output_format=:dataframe)
-  precis(roaches2_df[:, [Symbol("beta.$i") for i in 1:data.K]])
+  read_summary(sm2, true)
   nt2 = read_samples(sm2)
 
   # Compute LOO and standard error
@@ -141,14 +139,8 @@ if success(rc2)
   @printf(">> elpd_loo = %.1f, SE(elpd_loo) = %.1f\n", elpd_loo2, se_elpd_loo2)
 
   # Check the shape parameter k of the generalized Pareto distribution
-  if all(pk2 .< 0.5)
-      println("All Pareto k estimates OK (k < 0.5).")
-  else
-    pk_good = sum(pk2 .<= 0.5)
-    pk_ok = length(pk2[pk2 .<= 0.7]) - pk_good
-    pk_bad = length(pk2[pk2 .<= 1]) - pk_good - pk_ok
-    println((good=pk_good, ok=pk_ok, bad=pk_bad, very_bad=sum(pk2 .> 1)))
-  end
+  pk_qualify(pk2) |> display
+  
 end
 
 begin

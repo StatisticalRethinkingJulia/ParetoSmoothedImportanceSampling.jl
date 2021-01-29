@@ -9,9 +9,8 @@ using Pkg, DrWatson, ParetoSmoothedImportanceSampling
 
 # ╔═╡ 20d3ad36-6008-11eb-2f2a-d379b234b0e9
 begin
-	using StatisticalRethinking
-	using StanSample
-	using RDatasets
+	using StanSample, StatsFuns, StatsPlots
+	using DataFrames, RDatasets
 end;
 
 # ╔═╡ af6b0b20-6008-11eb-2fa1-2f61145ab7db
@@ -67,7 +66,8 @@ begin
 
 	if success(rc)
 		cars_df = read_samples(cars_stan_model; output_format=:dataframe)
-		PRECIS(cars_df[:, [:a, :b, :sigma]])
+		isdefined(Main, :StatisticalRethinking) && 
+            PRECIS(cars_df[:, [:a, :b, :sigma]])
 	end
 end
 

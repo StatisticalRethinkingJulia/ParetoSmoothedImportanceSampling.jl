@@ -9,7 +9,8 @@ using Pkg, DrWatson, ParetoSmoothedImportanceSampling
 
 # ╔═╡ c9e1486c-5e9f-11eb-08ed-671b762dd075
 begin
-	using StatisticalRethinking, StanSample
+  using StanSample, StatsFuns, StatsPlots
+  using DataFrames
 end
 
 # ╔═╡ d20c24f8-5ec2-11eb-3d45-d97fedebee8e
@@ -71,8 +72,7 @@ end;
 
 # ╔═╡ e3a796f2-5e9f-11eb-20bf-9de765acb853
 if success(rc1)
-  roaches1_df = read_samples(sm1; output_format=:dataframe)
-  precis(roaches1_df[:, [Symbol("beta.$i") for i in 1:data.K]])
+  read_summary(sm1, true)
   nt1 = read_samples(sm1)
 
   # Compute LOO and standard error
@@ -86,10 +86,7 @@ end
 # ╔═╡ abc94b86-5ea9-11eb-1d5d-578926de3257
 if success(rc1)
 	# Check the shape parameter k of the generalized Pareto distribution
-	pk_good1 = sum(pk1 .<= 0.5)
-	pk_ok1 = length(pk1[pk1 .<= 0.7]) - pk_good1
-	pk_bad1 = length(pk1[pk1 .<= 1]) - pk_good1 - pk_ok1
-	(good=pk_good1, ok=pk_ok1, bad=pk_bad1, very_bad=sum(pk1 .> 1))
+	pk_qualify(pk1) |> display
 end
 
 # ╔═╡ e3b82668-5e9f-11eb-1641-a9dfed9eb108
@@ -145,8 +142,7 @@ end;
 
 # ╔═╡ e3ddad0a-5e9f-11eb-0a7d-150f9f398fe0
 if success(rc2)
-  roaches2_df = read_samples(sm2; output_format=:dataframe)
-  precis(roaches2_df[:, [Symbol("beta.$i") for i in 1:data.K]])
+  read_summary(sm2;, true)
   nt2 = read_samples(sm2)
 
   # Compute LOO and standard error

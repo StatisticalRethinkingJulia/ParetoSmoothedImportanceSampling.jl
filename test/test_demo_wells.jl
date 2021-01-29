@@ -1,8 +1,7 @@
 using ParetoSmoothedImportanceSampling
-using StatisticalRethinking
-using JSON
-using StanSample
+using StanSample, StatsFuns
 using Printf
+using JSON
 using Test
 
 ProjDir = @__DIR__

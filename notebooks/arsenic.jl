@@ -9,9 +9,8 @@ using Pkg, DrWatson, ParetoSmoothedImportanceSampling
 
 # ╔═╡ d4f7a39c-5ebb-11eb-0a37-4b8499832108
 begin
-	using StatisticalRethinking
+	using StanSample, StatsFuns, StatsPlots
 	using JSON
-	using StanSample
 
 	ProjDir = joinpath(psis_path, "..", "examples", "arsenic")
 	include(joinpath(ProjDir, "cvit.jl"))
