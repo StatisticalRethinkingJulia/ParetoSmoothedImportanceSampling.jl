@@ -142,7 +142,7 @@ end;
 
 # ╔═╡ e3ddad0a-5e9f-11eb-0a7d-150f9f398fe0
 if success(rc2)
-  read_summary(sm2;, true)
+  read_summary(sm2, true)
   nt2 = read_samples(sm2)
 
   # Compute LOO and standard error
@@ -155,14 +155,12 @@ end
 
 # ╔═╡ ce509a0c-5ea8-11eb-3f2e-01023f29a1e3
 if success(rc2)
-	
-  # Check the shape parameter k of the generalized Pareto distribution
-	
-    pk_qualify(pk2)
+	  # Check the shape parameter k of the generalized Pareto distribution
+	pk_qualify(pk2)
 end
 
 # ╔═╡ e3f103f0-5e9f-11eb-159a-452961ed2619
-  pk_plot(pk2; title="PSIS diagnostic plot for neg-binomial model.", leg=:topright)
+pk_plot(pk2; title="PSIS diagnostic plot for neg-binomial model.", leg=:topright)
 
 # ╔═╡ Cell order:
 # ╠═dcb4d418-5ec2-11eb-29d8-214f38b4d3ae
