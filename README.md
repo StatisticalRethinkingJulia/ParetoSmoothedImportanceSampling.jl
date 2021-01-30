@@ -33,6 +33,18 @@ To use the demonstration Pluto notebooks, you can add:
   [c3e4b0f8] Pluto v0.12.18
   [7f904dfe] PlutoUI v0.6.11
 ```
+
+To run the notebooks, I typically use an `alias`:
+```
+alias pluto="clear; j -i -e 'using Pkg; import Pluto; Pluto.run()'"
+```
+and then do:
+```
+$ cd ~/.julia/dev/ParetoSmoothedImportanceSampling
+$ pluto
+```
+to start Pluto from within that directory. 
+
 The cars WAIC example requires RDatasets.jl to be installed and functioning.
 
 ### Included functions

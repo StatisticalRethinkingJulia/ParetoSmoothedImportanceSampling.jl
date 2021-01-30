@@ -5,23 +5,21 @@ using Markdown
 using InteractiveUtils
 
 # ╔═╡ 8183b318-5ebb-11eb-1cd8-a96e8704a378
-using Pkg, DrWatson, ParetoSmoothedImportanceSampling
-
-# ╔═╡ d4f7a39c-5ebb-11eb-0a37-4b8499832108
-begin
-	using StanSample, StatsFuns, StatsPlots
-	using JSON
-
-	ProjDir = joinpath(psis_path, "..", "examples", "arsenic")
-	include(joinpath(ProjDir, "cvit.jl"))
-end;
+using Pkg, DrWatson
 
 # ╔═╡ 686dac30-5ebb-11eb-00f1-434980dba906
 begin
-	cd(psis_path)
-	@quickactivate "ParetoSmoothedImportanceSampling"
-	pkg"instantiate"
+	@quickactivate "ParetoSmoothedImportanceSamplng"
+	using ParetoSmoothedImportanceSampling
+	using StanSample, StatsFuns, StatsPlots
+	using DataFrames, CSV, JSON
 end
+
+# ╔═╡ 923212a8-630d-11eb-390f-75d21be80011
+begin
+	ProjDir = joinpath(psis_path, "..", "examples", "arsenic")
+	include(joinpath(ProjDir, "cvit.jl"))
+end;
 
 # ╔═╡ ca0d916e-5ebe-11eb-3af1-0993bf5b82c8
 md" ### Psis_loo."
@@ -125,6 +123,9 @@ begin
 	sm3 = SampleModel("arsenic_logistic_t", model_str_2)
 end;
 
+# ╔═╡ d83916ba-6309-11eb-309b-474efacd9f85
+md" ##### Be patient... 10 cross Validations."
+
 # ╔═╡ e70f73aa-5eb8-11eb-1960-bf6731681898
 begin
 	cvitr, cvitst = cvit(n, 10, true)
@@ -160,7 +161,7 @@ end
 # ╔═╡ Cell order:
 # ╠═8183b318-5ebb-11eb-1cd8-a96e8704a378
 # ╠═686dac30-5ebb-11eb-00f1-434980dba906
-# ╠═d4f7a39c-5ebb-11eb-0a37-4b8499832108
+# ╠═923212a8-630d-11eb-390f-75d21be80011
 # ╟─ca0d916e-5ebe-11eb-3af1-0993bf5b82c8
 # ╟─2ee71b16-5ebd-11eb-3a7d-4553f2f22274
 # ╠═37f06bc2-5ebd-11eb-31f6-65bfa74ea9cf
@@ -177,5 +178,6 @@ end
 # ╟─98d7208e-5ebd-11eb-3a64-e568c1ceebc0
 # ╟─e86ee35c-5ebd-11eb-1932-ffbde638f11e
 # ╠═e86f0ab2-5ebd-11eb-1a0b-6958db3a7435
+# ╟─d83916ba-6309-11eb-309b-474efacd9f85
 # ╠═e70f73aa-5eb8-11eb-1960-bf6731681898
 # ╠═1bf8d5a2-5ebe-11eb-12b3-2501e2f9d288

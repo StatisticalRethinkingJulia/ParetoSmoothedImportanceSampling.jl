@@ -5,26 +5,21 @@ using Markdown
 using InteractiveUtils
 
 # ╔═╡ b9fc511c-6007-11eb-0c6b-1f6871a40710
-using Pkg, DrWatson, ParetoSmoothedImportanceSampling
+using Pkg, DrWatson
 
-# ╔═╡ 20d3ad36-6008-11eb-2f2a-d379b234b0e9
+# ╔═╡ 20d377b2-6008-11eb-364a-617b6934ecb2
 begin
+	@quickactivate "ParetoSmoothedImportanceSamplng"
+	using ParetoSmoothedImportanceSampling
 	using StanSample, StatsFuns, StatsPlots
-	using DataFrames, RDatasets
-end;
+	using DataFrames, CSV, RDatasets
+end
 
 # ╔═╡ af6b0b20-6008-11eb-2fa1-2f61145ab7db
 md"
 !!! note
 
 	This script assumes that RDatasets.jl is loaded. RDatasets.jl is not included in the dependencies of PSIS.jl (as it would require R to be installed)."
-
-# ╔═╡ 20d377b2-6008-11eb-364a-617b6934ecb2
-begin
-	cd(psis_path)
-	@quickactivate "ParetoSmoothedImportanceSampling"
-	pkg"instantiate"
-end
 
 # ╔═╡ 20d43cda-6008-11eb-09f0-53489a26110d
 df = RDatasets.dataset("datasets", "cars");
@@ -110,7 +105,6 @@ pk_plot(pk)
 # ╟─af6b0b20-6008-11eb-2fa1-2f61145ab7db
 # ╠═b9fc511c-6007-11eb-0c6b-1f6871a40710
 # ╠═20d377b2-6008-11eb-364a-617b6934ecb2
-# ╠═20d3ad36-6008-11eb-2f2a-d379b234b0e9
 # ╠═20d43cda-6008-11eb-09f0-53489a26110d
 # ╠═20e22570-6008-11eb-1565-f13541b41861
 # ╠═20e2ebb6-6008-11eb-34f5-61f1ec3d024c

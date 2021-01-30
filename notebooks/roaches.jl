@@ -5,19 +5,14 @@ using Markdown
 using InteractiveUtils
 
 # ╔═╡ dcb4d418-5ec2-11eb-29d8-214f38b4d3ae
-using Pkg, DrWatson, ParetoSmoothedImportanceSampling
-
-# ╔═╡ c9e1486c-5e9f-11eb-08ed-671b762dd075
-begin
-  using StanSample, StatsFuns, StatsPlots
-  using DataFrames
-end
+using Pkg, DrWatson
 
 # ╔═╡ d20c24f8-5ec2-11eb-3d45-d97fedebee8e
 begin
-	cd(psis_path)
 	@quickactivate "ParetoSmoothedImportanceSamplng"
-	pkg"instantiate"
+	using ParetoSmoothedImportanceSampling
+	using StanSample, StatsFuns, StatsPlots
+	using DataFrames, CSV
 end
 
 # ╔═╡ e3552750-5e9f-11eb-324b-8df36d671c79
@@ -165,7 +160,6 @@ pk_plot(pk2; title="PSIS diagnostic plot for neg-binomial model.", leg=:topright
 # ╔═╡ Cell order:
 # ╠═dcb4d418-5ec2-11eb-29d8-214f38b4d3ae
 # ╠═d20c24f8-5ec2-11eb-3d45-d97fedebee8e
-# ╠═c9e1486c-5e9f-11eb-08ed-671b762dd075
 # ╠═e3552750-5e9f-11eb-324b-8df36d671c79
 # ╠═e3691972-5e9f-11eb-20b2-a766ef562598
 # ╠═e371fde4-5e9f-11eb-39ad-8d25ac3034fc
