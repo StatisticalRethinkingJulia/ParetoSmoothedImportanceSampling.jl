@@ -20,7 +20,7 @@ not exist and if tail index k>1 the mean of the raw estimate does not exist
 and the PSIS estimate is likely to have large variation and some bias.
 
 # Arguments
-* `log_lik::Union{AbstractArray, Mamba.Chains}`: Array of size n x m containing n posterior samples of the log likelihood terms p(y_i|\theta^s).
+* `log_lik::AbstractArray`: Array of size n x m containing n posterior samples of the log likelihood terms p(y_i|\theta^s).
 * `wcpp::Real`: Percentage of samples used for GPD fit estimate (default is 20).
 * `wtrunc::Float64`: Positive parameter for truncating very large weights to n^wtrunc. Providing False or 0 disables truncation. Default values is 3/4.
 
