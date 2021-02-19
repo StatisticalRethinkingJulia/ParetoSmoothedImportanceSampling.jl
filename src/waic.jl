@@ -24,7 +24,7 @@ function waic( ll::AbstractArray; pointwise=false , log_lik="log_lik" , kwargs..
     try 
         se = sqrt( n_obs*var2(waic_vec) )
     catch e
-        prinrln(e)
+        println(e)
         se = nothing
     end
 
