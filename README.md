@@ -58,6 +58,9 @@ The cars WAIC example requires RDatasets.jl to be installed and functioning.
 `waic()` -
     Compute WAIC for a loglikelihood matrix.
 
+`dic()` -
+    Deviance Information Criterion.
+
 `pk_qualify()` -
     Show location of pk values.
 
