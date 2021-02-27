@@ -5,7 +5,7 @@
 Computes Deviance Information Criterion (DIC).
 
 # Arguments
-* `log_lik::AbstractArray`: Array of size n x m containing n posterior samples of the log likelihood terms p(y_i|\theta^s).
+* `log_lik::AbstractArray`: A vector of posterior log likelihoods
 
 # Returns
 * `dic::Real`: DIC value
