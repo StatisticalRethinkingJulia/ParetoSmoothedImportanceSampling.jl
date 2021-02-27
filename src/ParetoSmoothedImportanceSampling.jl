@@ -32,7 +32,7 @@ arXiv preprint arXiv:1507.02646.
 
 module ParetoSmoothedImportanceSampling
 
-using StatsFuns
+using StatsFuns, Statistics
 
 psis_path = @__DIR__
 
@@ -40,9 +40,9 @@ include("psisloo.jl")
 include("psislw.jl")
 include("gpdfitnew.jl")
 include("gpinv.jl")
-#include("logsumexp.jl")
 include("waic.jl")
 include("pk_utilities.jl")
+include("dic.jl")
 
 export
     psis_path
