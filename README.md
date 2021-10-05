@@ -14,9 +14,11 @@ PSIS leave-one-out cross-validation based on the [Matlab package called `PSIS` b
 
 Updates for Julia v1+, the new Pkg ecosystem and the addition of WAIC and pk utilities have been done by Rob J Goedman.
 
+A new package, ParetoSmooth.jl, might over time replace the inner parts of this package.
+
 ### Installation
 
-Once registered, ParetoSmoothedImportanceSampling.jl can be installed with:
+ParetoSmoothedImportanceSampling.jl can be installed with:
 ```
 Pkg.add("ParetoSmoothedImportanceSampling")
 ```
