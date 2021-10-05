@@ -1,7 +1,7 @@
 name = "ParetoSmoothedImportanceSampling"
 uuid = "98f080ec-61e2-11eb-1c7b-31ea1097256f"
 authors = ["@alvaro1101, Rob J Goedman <goedman@icloud.com>"]
-version = "1.1.0"
+version = "1.0.0"
 
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
@@ -21,6 +21,7 @@ CSV = "0.9"
 DataFrames = "1.2"
 Distributions = "0.25"
 JSON = "0.21"
+StanSample = "4.2"
 StatsFuns = "0.9"
 StatsPlots = "0.14"
 julia = "1"
