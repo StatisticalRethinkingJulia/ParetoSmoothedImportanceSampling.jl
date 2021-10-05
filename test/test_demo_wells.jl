@@ -1,7 +1,8 @@
 using ParetoSmoothedImportanceSampling
-using StanSample, StatsFuns
+using Statistics, StatsFuns
 using Printf
 using JSON
+using StanSample
 using Test
 
 ProjDir = @__DIR__
@@ -22,7 +23,7 @@ data1 = (p = m, N = n, y = Int.(y), x = x)
 # Fit the model in Stan
 rc1 = stan_sample(sm1; data=data1)
 if success(rc1)
-    nt1 = read_samples(sm1)
+    nt1 = read_samples(sm1, :namedtuple)
 
     # Compute LOO and standard error
     log_lik = nt1.log_lik'
@@ -52,7 +53,7 @@ data2 = (p = m, N = n, y = Int.(y), x = x2)
 rc2 = stan_sample(sm1; data=data2)
 
 if success(rc2)
-    nt2 = read_samples(sm1)
+    nt2 = read_samples(sm1, :namedtuple)
     # Compute LOO and standard error
     log_lik = nt2.log_lik'
     loo2, loos2, pk2 = psisloo(log_lik)
@@ -95,7 +96,7 @@ for cvi in 1:3
     # Fit the model in Stan
     rc3 = stan_sample(sm3; data=standatacv)
     if success(rc3)
-        nt3 = read_samples(sm3)
+        nt3 = read_samples(sm3, :namedtuple)
         # Compute LOO and standard error
         log_likt = nt3.log_likt'
         local n_sam, n_obs = size(log_likt)
