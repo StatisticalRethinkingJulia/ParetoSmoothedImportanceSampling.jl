@@ -21,7 +21,7 @@ sm1 = SampleModel("arsenic_logistic", model_str)
 
 data1 = (p = m, N = n, y = Int.(y), x = x)
 # Fit the model in Stan
-rc1 = stan_sample(sm1, false; data=data1)
+rc1 = stan_sample(sm1; use_json=false, data=data1)
 if success(rc1)
     nt1 = read_samples(sm1, :namedtuple)
 
@@ -50,7 +50,7 @@ x2 = Float64[log.(data["arsenic"])  data["dist"]]
 # Model
 data2 = (p = m, N = n, y = Int.(y), x = x2)
 # Fit the model in Stan
-rc2 = stan_sample(sm1, false; data=data2)
+rc2 = stan_sample(sm1; use_json=false, data=data2)
 
 if success(rc2)
     nt2 = read_samples(sm1, :namedtuple)
@@ -94,7 +94,7 @@ for cvi in 1:3
         xt = x[cvitst[cvi],:], yt = Int.(y[cvitst[cvi]]))
 
     # Fit the model in Stan
-    rc3 = stan_sample(sm3, false; data=standatacv)
+    rc3 = stan_sample(sm3; use_json=false, data=standatacv)
     if success(rc3)
         nt3 = read_samples(sm3, :namedtuple)
         # Compute LOO and standard error
