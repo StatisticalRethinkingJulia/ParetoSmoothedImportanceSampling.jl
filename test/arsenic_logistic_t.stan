@@ -1,10 +1,10 @@
 data {
   int<lower=0> p;
   int<lower=0> N;
-  int<lower=0,upper=1> y[N];
+  array[N] int<lower=0,upper=1> y;
   matrix[N,p] x;
   int<lower=0> Nt;
-  int<lower=0,upper=1> yt[Nt];
+  array[Nt] int<lower=0,upper=1> yt;
   matrix[Nt,p] xt;
 }
 transformed data {

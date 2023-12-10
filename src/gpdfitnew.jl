@@ -2,7 +2,7 @@
 """
     gpdfitnew(x)
 
-Estimate the paramaters for the Generalized Pareto Distribution (GPD). Returns empirical Bayes estimate for the parameters of the two-parameter generalized Parato distribution given the data.
+Estimate the parameters for the Generalized Pareto Distribution (GPD). Returns empirical Bayes estimate for the parameters of the two-parameter generalized Parato distribution given the data.
 
 # Arguments
 * `x::AbstractArray`: One dimensional data array.
